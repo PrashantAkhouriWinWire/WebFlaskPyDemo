@@ -14,9 +14,9 @@ app = Flask(__name__, template_folder='templates', static_folder='static', stati
 app.secret_key = "supersecretkey"  # Replace with a secure key in production
 
 
-
 env = os.environ.get("FLASK_ENV", "development")
 print("Current Environment: " + env)
+API_KEY = os.environ.get("API_KEY", "mydefaultapikey")  
 
 if(env == 'development'):
     app.config.from_object('config.DevelopmentConfig')  
@@ -26,6 +26,13 @@ else:
 # Initialize SQLAlchemy
 db = SQLAlchemy(app)
 
+# def require_api_key(func):
+#     def wrapper(*args, **kwargs):
+#         key = request.headers.get("X-API-KEY")
+#         if key != API_KEY:
+#             return jsonify({"error": "Unauthorized"}), 403
+#         return func(*args, **kwargs)
+#     return wrapper
 
 @app.context_processor
 def inject_user():
@@ -53,6 +60,7 @@ def index():
         return render_template('login.html') 
 
 ## HOME PAGE 
+#@require_api_key
 @app.route('/home', methods=['GET','POST'])
 def home(): 
     # Check if user session exists
@@ -147,27 +155,3 @@ if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
 
 
-
-# # SQL Server Connection - Using Integrated Security (Windows Authentication)
-# Note: When using Integrated Security=True, DO NOT include username/password
-# app.config['SQLALCHEMY_DATABASE_URI'] = (
-#     "mssql+pyodbc://pyuser:password123@localhost/empDB"
-#     "?driver=ODBC+Driver+17+for+SQL+Server"
-# )
-
-
-# API data fetch from SQL Server
-# @app.route('/employees')
-# def employees():
-#     result = db.session.execute(text("SELECT * FROM employee"))
-#     return jsonify(result.mappings().all())
-
-
-#db = SQLAlchemy(app)
-
-# @app.route('/employees')
-# def employees():
-#     result = db.session.execute(text("SELECT * FROM employees"))
-#     return jsonify(result.mappings().all())
-#GLobal If you dont want to pass username in every render_template, use a context processor:
-# all places You can then use {{con text_username}} in html 
