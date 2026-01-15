@@ -1,0 +1,81 @@
+{%extends "home.html" %}
+{% block title %}User List{% endblock %}
+{% block content %}
+<div>
+<h2>User List</h2>
+<br>
+<div>
+    <input type="button" id="btnRefresh" name="btnRefresh" class="btn btn-primary" value="Refresh">Refresh User List</input>
+</div>
+{% if userlist is none %}
+    <p>No users found.</p>
+{% else %}
+{% for user in userlist %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name | upper }}</td>
+            <td>{{ user.email }}</td>
+    </tbody>
+</table>
+<br>
+
+{% endfor %}
+{% endif %}
+    </div>
+{% endblock %}
+
+<div id="userTableContainer"></div>
+<!-- AT bootomm of page wriet eventhandler clipt to fill data -->
+ <script>
+
+document.getElementById("btnRefresh").addEventListener("click", function() {
+    console.log('dfddf')
+    fetch("/getEmployees")
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById("userTableContainer");
+            if (!data || data.length === 0) {
+                container.innerHTML = "<p>No users found.</p>";
+                return;
+            }
+
+            // Build table HTML
+            let html = "";
+            data.forEach(user => {
+                html += `
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>${user.id}</td>
+                            <td>${user.name.toUpperCase()}</td>
+                            <td>${user.email}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                `;
+            });
+
+            container.innerHTML = html;
+        })
+        .catch(err => {
+            console.error("Error fetching employees:", err);
+        });
+});
+</script>

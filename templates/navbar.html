@@ -1,0 +1,49 @@
+<style>
+    .navbar {
+        font-size: medium;
+        color: blue;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        display: flex; /* enhancement */
+    }
+
+    .navbar li {
+        float: left;
+        flex-direction: row;
+    }
+
+    .navbar li a {
+        flex-direction: row;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .navbar li a:hover {
+        flex-direction: row;
+        background-color: #111;
+    }
+</style>
+<script>
+    console.log("Navbar loaded");
+</script>
+<h1>
+    <nav>
+        <ul class="navbar">
+            <li>Welcome , {{ context_username}}  {{context_date}} {{context_debug}}</li>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/users">User List</a></li>
+            <li><a href="/getEmployee">EmployeeDB List</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/signout">Sign Out</a></li>
+        </ul>
+    </nav>
+</h1>
+</body>
+</html>

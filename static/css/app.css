@@ -1,0 +1,134 @@
+/* ================================
+   Global Styles (Bootstrap-friendly)
+   ================================ */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: #f8f9fa; /* Bootstrap light gray */
+    color: #212529;
+}
+
+/* Container spacing override */
+.container,
+.container-fluid {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* ================================
+   Custom Navbar (Your Provided CSS)
+   ================================ */
+
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    display: flex; /* enhancement */
+}
+
+.navbar li {
+    float: left;
+    flex-direction: row;
+}
+
+.navbar li a {
+    flex-direction: row;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.navbar li a:hover {
+    flex-direction: row;
+    background-color: #111;
+}
+
+/* Active link support */
+.navbar li a.active {
+    background-color: #0d6efd; /* Bootstrap primary */
+}
+
+/* ================================
+   Page Sections
+   ================================ */
+
+.section {
+    padding: 60px 20px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+}
+
+.section-alt {
+    background-color: #f1f3f5;
+}
+
+/* ================================
+   Buttons (Bootstrap-safe)
+   ================================ */
+
+.btn-custom {
+    background-color: #0d6efd;
+    color: #fff;
+    border-radius: 4px;
+    padding: 10px 20px;
+}
+
+.btn-custom:hover {
+    background-color: #0b5ed7;
+    color: #fff;
+}
+
+/* ================================
+   Footer
+   ================================ */
+
+.footer {
+    background-color: #333;
+    color: #ccc;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* ================================
+   Responsive Adjustments
+   ================================ */
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+    }
+
+    .navbar li {
+        float: none;
+    }
+
+    .navbar li a {
+        text-align: left;
+        padding: 12px 20px;
+    }
+}
