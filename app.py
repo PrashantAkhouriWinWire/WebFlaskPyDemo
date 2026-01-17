@@ -6,6 +6,7 @@ from flask import Flask, jsonify, redirect, render_template,g, request , session
 import requests
 
 from flask_sqlalchemy import SQLAlchemy
+#from flask_caching import Cache
 
 from UserService import UserService
 from UserRepo import UserRepo
@@ -13,6 +14,10 @@ from UserRepo import UserRepo
 app = Flask(__name__, template_folder='templates', static_folder='static', static_url_path='/')
 app.secret_key = "supersecretkey"  # Replace with a secure key in production
 
+# cache = Cache(app)
+
+# app.config["CACHE_TYPE"] = "SimpleCache"
+# app.config["CACHE_DEFAULT_TIMEOUT"] = 300  # seconds
 
 env = os.environ.get("FLASK_ENV", "development")
 print("Current Environment: " + env)
@@ -107,6 +112,7 @@ def external_users():
     return g.user_repo.get_all_users()
 
 # Add this new API endpoint (after the /external-users route)
+#@cache.cached(timeout=60)
 @app.route('/getEmployee')
 def get_employee():
 
